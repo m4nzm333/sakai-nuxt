@@ -77,8 +77,6 @@ onBeforeMount(() => {
     });
     CustomerService.getCustomersLarge().then((data: any) => (customers2.value = data));
     CustomerService.getCustomersMedium().then((data: any) => (customers3.value = data));
-
-    initFilters1();
 });
 
 function initFilters1() {
@@ -102,6 +100,8 @@ function expandAll() {
 function collapseAll() {
     expandedRows.value = null;
 }
+
+initFilters1();
 
 function formatCurrency(value: number) {
     return value.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
