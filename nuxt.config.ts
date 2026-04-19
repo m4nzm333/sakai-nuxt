@@ -10,6 +10,12 @@ export default defineNuxtConfig({
 
   modules: ['@primevue/nuxt-module'],
 
+  nitro: {
+    externals: {
+      traceInclude: ['vue/index.mjs', 'vue/index.js']
+    }
+  },
+
   primevue: {
     options: {
       theme: {
