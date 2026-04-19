@@ -1,18 +1,18 @@
 <script setup lang="ts">
 const { layoutState, isDesktop } = useLayout()
 
-const props = defineProps<{
+const props = withDefaults(defineProps<{
   item: Record<string, any>
   index?: number
   root?: boolean
   parentPath?: string | null
-}>()
-
-const root = props.root ?? true
-const parentPath = props.parentPath ?? null
+}>(), {
+  root: true,
+  parentPath: null
+})
 
 const fullPath = computed(() =>
-  props.item.path ? (parentPath ? parentPath + props.item.path : props.item.path) : null
+  props.item.path ? (props.parentPath ? props.parentPath + props.item.path : props.item.path) : null
 )
 
 const isActive = computed(() => {
@@ -46,7 +46,7 @@ const itemClick = (event: Event, item: Record<string, any>) => {
 }
 
 const onMouseEnter = () => {
-  if (isDesktop() && root && props.item.items && layoutState.menuHoverActive) {
+  if (isDesktop() && props.root && props.item.items && layoutState.menuHoverActive) {
     layoutState.activePath = fullPath.value
   }
 }
